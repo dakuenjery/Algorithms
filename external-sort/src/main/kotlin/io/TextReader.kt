@@ -15,6 +15,12 @@ class TextReader(private val file: File) : IReader {
         scanner.useDelimiter(", ")
     }
 
+    override fun readAll(buffer: MutableList<Int>) {
+        while (scanner.hasNextInt()) {
+            buffer.add(scanner.nextInt())
+        }
+    }
+
     override fun readBlock(buffer: IntArray): Int {
         var i = 0
 

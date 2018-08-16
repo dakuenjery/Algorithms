@@ -9,6 +9,7 @@ interface IOFactory {
 }
 
 interface IReader : Closeable {
+    fun readAll(buffer: MutableList<Int>)
     fun readBlock(buffer: IntArray): Int
     fun readValue(): Int
     fun getCachedValue(): Int
@@ -17,6 +18,7 @@ interface IReader : Closeable {
 }
 
 interface IWriter : Closeable {
+    fun writeAll(buffer: List<Int>)
     fun writeBlock(buffer: IntArray, n: Int)
     fun writeValue(value: Int)
 }

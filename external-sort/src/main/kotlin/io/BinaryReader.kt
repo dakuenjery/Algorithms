@@ -1,15 +1,17 @@
 package io
 
-import java.io.DataInputStream
-import java.io.EOFException
-import java.io.File
-import java.io.FileInputStream
+import java.io.*
 
 class BinaryReader(private val file: File) : IReader {
-    private val stream = DataInputStream(FileInputStream(file))
+    private val stream = DataInputStream(BufferedInputStream(FileInputStream(file)))
 
     private var cached = false
     private var cachedValue = 0
+
+    override fun readAll(buffer: MutableList<Int>) {
+        while (stream.available() > 0)
+            buffer.add(stream.readInt())
+    }
 
     override fun readBlock(buffer: IntArray): Int {
         var i = 0

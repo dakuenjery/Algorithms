@@ -8,6 +8,18 @@ class TextWriter(file: File) : IWriter {
     private val stream = BufferedWriter(FileWriter(file))
     private var dirty = false
 
+    override fun writeAll(buffer: List<Int>) {
+        if (dirty)
+            stream.write(", ")
+
+        for (i in 0..buffer.size-2)
+            stream.write("${buffer[i]}, ")
+
+        stream.write("${buffer.last()}")
+
+        dirty = true
+    }
+
     override fun writeBlock(buffer: IntArray, n: Int) {
         if (dirty)
             stream.write(", ")
